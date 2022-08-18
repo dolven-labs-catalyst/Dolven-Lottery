@@ -1,0 +1,7 @@
+ecdsa
+fastecdsa
+sympy
+cairo-lang
+starknet-devnet
+cairo-nile
+openzeppelin-cairo-contracts
