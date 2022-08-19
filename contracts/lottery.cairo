@@ -1,4 +1,3 @@
-# Declare this file as a StarkNet contract.
 %lang starknet
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
@@ -35,27 +34,28 @@ from starkware.cairo.common.math import (
 from openzeppelin.token.erc20.interfaces.IERC20 import IERC20
 
 @storage_var
-func manager() -> (user : felt): # type: address
-end
- 
-@storage_var
-func winner() -> (winner : felt): # type: address
+func manager() -> (user : felt):
 end
 
 @storage_var
-func players(id : felt) -> (user : felt): # type: mapping
+func winner() -> (winner : felt):
 end
 
 @storage_var
-func player_count() -> (count : felt): # type: integer
+func players(id : felt) -> (user : felt):
 end
 
 @storage_var
-func token() -> (address : felt): # type: address
+func player_count() -> (count : felt):
 end
 
 @storage_var
-func ticketPrice() -> (amount : Uint256): # type: Uint256
+func token() -> (address : felt):
+end
+
+# type: Uint256
+@storage_var
+func ticketPrice() -> (amount : Uint256):
 end
 
 @constructor
@@ -142,9 +142,9 @@ end
 func pick_winner{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
     let (_winner) = get_winner()
     let (caller) = get_caller_address()
-    let (manager) = manager_address.read()
+    let (manager) = get_manager()
     with_attr error_message("Caller address must be manager. Got: {caller}."):
-        assert_not_equal(manager,caller)
+        assert_not_equal(manager, caller)
     end
     let (token_address) = token.read()
     let (current_contract_address) = get_contract_address()
